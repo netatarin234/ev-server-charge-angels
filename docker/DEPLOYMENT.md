@@ -15,6 +15,12 @@
 docker compose -f docker/docker-compose-deploy.yml up -d --build
 ```
 
+Если порт MongoDB уже занят, задайте другой порт:
+
+```bash
+MONGO_PORT=27018 docker compose -f docker/docker-compose-deploy.yml up -d --build
+```
+
 После старта:
 
 * REST API сервера доступен на `http://localhost:81`.

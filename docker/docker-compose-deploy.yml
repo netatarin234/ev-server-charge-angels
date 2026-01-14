@@ -19,7 +19,7 @@ services:
         export_file: export-empty-evse-db.zip
     image: evse-mongo:local
     ports:
-      - 27017:27017
+      - "${MONGO_PORT:-27017}:27017"
     volumes:
       - "mongo-data:/data/db"
     env_file:
