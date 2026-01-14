@@ -33,7 +33,8 @@ services:
     depends_on:
     - mongodb
     build:
-      context: replica
+      context: .
+      dockerfile: replica/Dockerfile
     links:
     - mongodb
     networks:
