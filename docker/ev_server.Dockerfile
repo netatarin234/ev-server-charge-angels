@@ -28,7 +28,7 @@ COPY --from=builder /usr/builder/dist ./dist
 
 EXPOSE 81 8000 8010 8080 9090 9292
 
-ADD https://github.com/ufoscout/docker-compose-wait/releases/download/2.7.3/wait /wait
+COPY docker/bin/wait /wait
 RUN chmod +x /wait
 
 RUN npm install -g pm2

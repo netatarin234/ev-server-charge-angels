@@ -1,0 +1,45 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+WAIT_HOSTS="${WAIT_HOSTS:-}"
+WAIT_HOSTS_TIMEOUT="${WAIT_HOSTS_TIMEOUT:-30}"
+WAIT_AFTER_HOSTS="${WAIT_AFTER_HOSTS:-0}"
+WAIT_SLEEP_INTERVAL="${WAIT_SLEEP_INTERVAL:-1}"
+
+if [[ -z "$WAIT_HOSTS" ]]; then
+  exit 0
+fi
+
+start_time=$(date +%s)
+
+IFS=',' read -ra hosts <<< "$WAIT_HOSTS"
+for host_port in "${hosts[@]}"; do
+  host="${host_port%%:*}"
+  port="${host_port##*:}"
+
+  if [[ -z "$host" || -z "$port" || "$host" == "$port" ]]; then
+    echo "Invalid WAIT_HOSTS entry: $host_port" >&2
+    exit 1
+  fi
+
+  echo "Waiting for $host:$port..."
+  while true; do
+    if (echo > "/dev/tcp/$host/$port") >/dev/null 2>&1; then
+      echo "$host:$port is available"
+      break
+    fi
+
+    now=$(date +%s)
+    elapsed=$((now - start_time))
+    if (( elapsed >= WAIT_HOSTS_TIMEOUT )); then
+      echo "Timeout after ${WAIT_HOSTS_TIMEOUT}s waiting for $host:$port" >&2
+      exit 1
+    fi
+
+    sleep "$WAIT_SLEEP_INTERVAL"
+  done
+done
+
+if (( WAIT_AFTER_HOSTS > 0 )); then
+  sleep "$WAIT_AFTER_HOSTS"
+fi
