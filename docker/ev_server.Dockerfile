@@ -6,9 +6,11 @@ WORKDIR /usr/builder
 
 COPY package.json package-lock.json ./
 
+RUN apt-get update && apt-get install -y git && rm -rf /var/lib/apt/lists/*
+
 RUN npm set progress=false && npm config set depth 0 && npm cache clean --force
 
-RUN npm install
+RUN rm -rf node_modules && npm install
 
 COPY LICENSE NOTICE ./
 COPY src ./src
