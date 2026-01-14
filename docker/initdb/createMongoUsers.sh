@@ -2,9 +2,9 @@
 
 # General configuration
 MONGODB_PORT=27017
-MONGO_CLIENT="mongo"
+MONGO_CLIENT="mongosh --quiet"
 
-echo "Using $MONGO_CLIENT command, please make sure to use mongosh --quiet for mongodb version > 4.x"
+echo "Using $MONGO_CLIENT command"
 
 # Admin
 DB="admin"
