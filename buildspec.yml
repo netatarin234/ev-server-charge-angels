@@ -4,7 +4,7 @@ parameter-store:
 phases:
   install:
     runtime-versions:
-      nodejs: 16
+      nodejs: 20
     commands:
       - mkdir -p ~/.ssh
       - if [ -z ${build_ssh_key} ]; then echo "missing build_ssh_key store parameter, exiting"; exit 1; fi
