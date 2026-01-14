@@ -27,10 +27,12 @@
     "port": 3080
   },
   "WSDLEndpoint": {
-    "baseUrl": "http://server-standalone:8000"
+    "baseUrl": "http://server-standalone:8000",
+    "baseSecureUrl": "http://server-standalone:8000"
   },
   "JsonEndpoint": {
-    "baseUrl": "ws://server-standalone:8010"
+    "baseUrl": "ws://server-standalone:8010",
+    "baseSecureUrl": "ws://server-standalone:8010"
   },
   "OCPIEndpoint": {
     "baseUrl": "http://server-standalone:9090"
