@@ -28,6 +28,9 @@ COPY --from=builder /usr/builder/dist ./dist
 
 EXPOSE 80
 
+COPY docker/bin/wait /wait
+RUN chmod +x /wait
+
 COPY docker/autoconfig.sh /autoconfig.sh
 RUN chmod +x /autoconfig.sh
 
