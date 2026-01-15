@@ -16,6 +16,11 @@ COPY initdb/${export_file} ${mongodb_home}
 RUN chown ${mongodb_user}:${mongodb_user} ${mongodb_home}/${export_file}
 RUN set -eux; \
   apt-get -y update; \
-  apt-get -y install --no-install-recommends flip unzip; \
+  apt-get -y install --no-install-recommends flip openssl unzip; \
   rm -rf /var/lib/apt/lists/*
+RUN openssl rand -base64 756 > /etc/mongo-keyfile \
+  && chown mongodb:mongodb /etc/mongo-keyfile \
+  && chmod 600 /etc/mongo-keyfile
 RUN flip -u ./docker-entrypoint-initdb.d/*.sh
+
+CMD ["mongod", "--replSet", "rs0", "--keyFile", "/etc/mongo-keyfile"]
