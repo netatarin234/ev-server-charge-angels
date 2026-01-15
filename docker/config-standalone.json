@@ -26,6 +26,25 @@
     "host": "localhost",
     "port": 3080
   },
+  "OCPIService": {
+    "protocol": "http",
+    "host": "server-standalone",
+    "port": 9090,
+    "debug": false
+  },
+  "OICPService": {
+    "protocol": "http",
+    "host": "server-standalone",
+    "port": 9080,
+    "debug": false
+  },
+  "Monitoring": {
+    "implementation": "prometheus",
+    "protocol": "http",
+    "host": "server-standalone",
+    "port": 9091,
+    "debug": false
+  },
   "WSDLEndpoint": {
     "baseSecureUrl": "http://server-standalone:8000"
   },
@@ -41,14 +60,8 @@
   },
   "Storage": {
     "implementation": "mongodb",
-    "uri": null,
-    "host": "mongodb",
-    "port": 27017,
-    "user": "evse-user",
-    "password": "evse-user-pwd",
-    "database": "evse",
+    "uri": "mongodb://evse-user:evse-user-pwd@mongodb:27017/evse?replicaSet=rs0",
     "poolSize": 200,
-    "replicaSet": "rs0",
     "debug": false
   },
   "Axios": {
@@ -83,6 +96,18 @@
     "RemotePushNotification": {
       "enabled": false
     }
+  },
+  "Firebase": {
+    "type": "",
+    "projectID": "",
+    "privateKeyID": "",
+    "privateKey": "",
+    "clientEmail": "",
+    "clientID": "",
+    "authURI": "",
+    "tokenURI": "",
+    "authProviderX509CertURL": "",
+    "clientX509CertURL": ""
   },
   "Authorization": {
     "debug": false
@@ -231,6 +256,10 @@
     "traceOcpp": false,
     "traceDatabase": false,
     "traceNotification": false
+  },
+  "Cache": {
+    "ttlSeconds": 3600,
+    "debug": false
   },
   "Logging": {
     "logLevel": "D"
