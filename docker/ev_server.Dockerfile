@@ -1,4 +1,4 @@
-FROM node:20 as builder
+FROM node:18.20.4 as builder
 
 ARG build
 
@@ -20,7 +20,7 @@ COPY webpack.config.js ./
 
 RUN npm run build:${build}
 
-FROM node:20
+FROM node:18.20.4
 
 WORKDIR /usr/app
 COPY --from=builder /usr/builder/node_modules ./node_modules
