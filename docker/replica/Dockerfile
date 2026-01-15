@@ -1,11 +1,9 @@
-FROM mongo:4.2
+FROM mongo:6
 
-COPY script.js ./
+COPY replica/script.js ./
 
-COPY docker/bin/wait /wait
+COPY bin/wait /wait
 RUN chmod +x /wait
 
-CMD /wait && mongo admin --host ev_mongo -u evse-admin -p evse-admin-pwd script.js
-
-
+CMD /wait && mongosh admin --host ev_mongo -u evse-admin -p evse-admin-pwd --file script.js
 
