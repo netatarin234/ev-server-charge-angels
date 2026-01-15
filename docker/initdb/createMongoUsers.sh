@@ -11,7 +11,7 @@ DB="admin"
 USER="evse-admin"
 PASSWORD="evse-admin-pwd"
 
-docker exec --tty mongodb $MONGO_CLIENT --port $MONGODB_PORT --eval "
+$MONGO_CLIENT --port $MONGODB_PORT --eval "
 db.getSiblingDB(\"$DB\")
     .createUser({
         user: \"$USER\",
@@ -67,7 +67,7 @@ DB="evse"
 USER="evse-user"
 PASSWORD="evse-user-pwd"
 
-docker exec --tty mongodb $MONGO_CLIENT --port $MONGODB_PORT --eval "
+$MONGO_CLIENT --port $MONGODB_PORT --eval "
 db.getSiblingDB(\"$DB\")
     .createUser({
         user: \"$USER\",
@@ -87,7 +87,7 @@ fi
 # Insert admin user in evse DB, default collection
 DB="evse"
 
-docker exec --tty mongodb $MONGO_CLIENT --port $MONGODB_PORT --eval "
+$MONGO_CLIENT --port $MONGODB_PORT --eval "
 db.getSiblingDB(\"$DB\").getCollection(\"default.users\").insert(
 {
   _id: ObjectId(),
