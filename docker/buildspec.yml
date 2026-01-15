@@ -5,6 +5,7 @@ phases:
   install:
     runtime-versions:
       docker: 19
+      nodejs: 18
   pre_build:
     commands:
       - mkdir -p ~/.ssh
